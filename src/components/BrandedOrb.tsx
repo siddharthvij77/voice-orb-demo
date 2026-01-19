@@ -124,9 +124,8 @@ export function BrandedOrb({ size = 300, showLogo = false }: BrandedOrbProps) {
     ctx.scale(dpr, dpr);
 
     const draw = () => {
-      // Clear canvas
-      ctx.fillStyle = "#000000";
-      ctx.fillRect(0, 0, size, size);
+      // Clear canvas with transparency
+      ctx.clearRect(0, 0, size, size);
 
       const centerX = size / 2;
       const centerY = size / 2;
