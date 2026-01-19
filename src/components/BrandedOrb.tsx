@@ -7,6 +7,7 @@ type OrbState = "idle" | "listening" | "speaking";
 interface BrandedOrbProps {
   size?: number;
   showLogo?: boolean;
+  bgColor?: string;
 }
 
 // Your company logo as a component
@@ -67,7 +68,7 @@ const CompanyLogo = ({
   </svg>
 );
 
-export function BrandedOrb({ size = 300, showLogo = false }: BrandedOrbProps) {
+export function BrandedOrb({ size = 300, showLogo = false, bgColor = "#000000" }: BrandedOrbProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>(0);
   const analyserRef = useRef<AnalyserNode | null>(null);
@@ -188,22 +189,10 @@ export function BrandedOrb({ size = 300, showLogo = false }: BrandedOrbProps) {
         ctx.fill();
       };
 
-      // Draw obsidian-like background circle
+      // Draw background circle matching page background
       ctx.beginPath();
       ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-      const obsidianGradient = ctx.createRadialGradient(
-        centerX - radius * 0.3,
-        centerY - radius * 0.3,
-        0,
-        centerX,
-        centerY,
-        radius
-      );
-      obsidianGradient.addColorStop(0, "#3a3a3a");
-      obsidianGradient.addColorStop(0.5, "#2a2a2a");
-      obsidianGradient.addColorStop(0.8, "#1a1a1a");
-      obsidianGradient.addColorStop(1, "#0f0f0f");
-      ctx.fillStyle = obsidianGradient;
+      ctx.fillStyle = bgColor;
       ctx.fill();
 
       // Clip to circle for the stripes
@@ -288,7 +277,7 @@ export function BrandedOrb({ size = 300, showLogo = false }: BrandedOrbProps) {
     return () => {
       cancelAnimationFrame(animationRef.current);
     };
-  }, [size, state, audioLevel]);
+  }, [size, state, audioLevel, bgColor]);
 
   return (
     <div className="flex flex-col items-center gap-8 relative">

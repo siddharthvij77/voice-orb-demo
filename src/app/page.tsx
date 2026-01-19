@@ -98,7 +98,7 @@ export default function Home() {
     <div className="flex min-h-screen items-center justify-center flex-col gap-8 relative transition-colors duration-300" style={{ backgroundColor: bgColor }}>
       {/* Main Orb */}
       {isBranded ? (
-        <BrandedOrb size={orbSize} showLogo={showLogo} />
+        <BrandedOrb size={orbSize} showLogo={showLogo} bgColor={bgColor} />
       ) : (
         <>
           <div style={{ width: orbSize, height: orbSize, ...filterStyle }}>
